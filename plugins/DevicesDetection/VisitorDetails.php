@@ -159,6 +159,8 @@ class VisitorDetails extends VisitorDetailsAbstract
             return $cmp;
         });
 
+        $devices = [];
+
         foreach ($this->devices as $type => $devicesData) {
             $typeDevices = [];
             foreach ($devicesData['devices'] as $name => $count) {
@@ -167,9 +169,13 @@ class VisitorDetails extends VisitorDetailsAbstract
                     'count' => $count
                 ];
             }
-            $this->devices[$type]['devices'] = $typeDevices;
+            $devices[] = [
+                'type' => $type,
+                'count' => $devicesData['count'],
+                'devices' => $typeDevices,
+            ];
         }
 
-        $profile['devices'] = $this->devices;
+        $profile['devices'] = $devices;
     }
 }
